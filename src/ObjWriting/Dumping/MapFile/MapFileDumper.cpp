@@ -49,7 +49,7 @@ void MapFileDumper::Init() const
 void MapFileDumper::WriteComment(const std::string& key) const
 {
     Indent();
-    m_stream << "// " << key << "\n";
+    m_stream << "// " << key << "\\\\\n";
 }
 
 void MapFileDumper::BeginEntity()

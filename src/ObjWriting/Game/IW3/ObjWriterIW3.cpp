@@ -5,6 +5,7 @@
 #include "Game/IW3/XModel/XModelDumperIW3.h"
 #include "Image/ImageDumperIW3.h"
 #include "Localize/LocalizeDumperIW3.h"
+#include "Menu/MenuListDumperIW3.h"
 #include "Maps/MapEntsDumperIW3.h"
 #include "RawFile/RawFileDumperIW3.h"
 #include "Sound/LoadedSoundDumperIW3.h"
@@ -37,7 +38,7 @@ void ObjWriter::RegisterAssetDumpers(AssetDumpingContext& context)
     // REGISTER_DUMPER(AssetDumperGfxWorld)
     // REGISTER_DUMPER(AssetDumperGfxLightDef)
     // REGISTER_DUMPER(AssetDumperFont_s)
-    // REGISTER_DUMPER(AssetDumperMenuList)
+    RegisterAssetDumper(std::make_unique<menu::MenuListDumperIW3>());
     // REGISTER_DUMPER(AssetDumpermenuDef_t)
     RegisterAssetDumper(std::make_unique<localize::DumperIW3>());
     // REGISTER_DUMPER(AssetDumperWeapon)
