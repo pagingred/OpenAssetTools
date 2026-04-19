@@ -2490,6 +2490,33 @@ namespace IW3
         const char* stringVal;
     };
 
+    enum WindowDefStaticFlag : unsigned int
+    {
+        WINDOW_FLAG_DECORATION = 0x100000,
+        WINDOW_FLAG_HORIZONTAL_SCROLL = 0x200000,
+        WINDOW_FLAG_OUT_OF_BOUNDS_CLICK = 0x2000000,
+        WINDOW_FLAG_SCREEN_SPACE = 0x400000,
+        WINDOW_FLAG_AUTO_WRAPPED = 0x800000,
+        WINDOW_FLAG_POPUP = 0x1000000,
+        WINDOW_FLAG_LEGACY_SPLIT_SCREEN_SCALE = 0x4000000,
+        WINDOW_FLAG_HIDDEN_DURING_FLASH_BANG = 0x10000000,
+        WINDOW_FLAG_HIDDEN_DURING_SCOPE = 0x20000000,
+        WINDOW_FLAG_HIDDEN_DURING_UI = 0x40000000,
+        WINDOW_FLAG_TEXT_ONLY_FOCUS = 0x80000000,
+    };
+
+    enum WindowDefDynamicFlag : unsigned int
+    {
+        WINDOW_FLAG_HOVERED = 0x1, // guessed
+        WINDOW_FLAG_FOCUSED = 0x2,
+        WINDOW_FLAG_VISIBLE = 0x4,
+        WINDOW_FLAG_FADING_OUT = 0x10,
+        WINDOW_FLAG_FADING_IN = 0x20,
+        WINDOW_FLAG_80 = 0x80,
+        WINDOW_FLAG_NON_DEFAULT_BACKCOLOR = 0x8000,
+        WINDOW_FLAG_NON_DEFAULT_FORECOLOR = 0x10000
+    };
+
     enum expDataType
     {
         VAL_INT = 0x0,
@@ -2570,17 +2597,24 @@ namespace IW3
         OP_LOCALVARSTRING = 0x3D,
         OP_TIMELEFT = 0x3E,
         OP_SECONDSASCOUNTDOWN = 0x3F,
-        OP_TOINT = 0x40,
-        OP_TOSTRING = 0x41,
-        OP_TOFLOAT = 0x42,
-        OP_GAMETYPENAME = 0x43,
-        OP_GAMETYPE = 0x44,
-        OP_GAMETYPEDESCRIPTION = 0x45,
-        OP_SCORE = 0x46,
-        OP_FRIENDSONLINE = 0x47,
-        OP_FOLLOWING = 0x48,
-        OP_STATRANGEBITSSET = 0x49,
-        NUM_OPERATORS = 0x4A,
+        OP_GAMEMSGWNDACTIVE = 0x40,
+        OP_TOINT = 0x41,
+        OP_TOSTRING = 0x42,
+        OP_TOFLOAT = 0x43,
+        OP_GAMETYPENAME = 0x44,
+        OP_GAMETYPE = 0x45,
+        OP_GAMETYPEDESCRIPTION = 0x46,
+        OP_SCORE = 0x47,
+        OP_FRIENDSONLINE = 0x48,
+        OP_FOLLOWING = 0x49,
+        OP_STATRANGEBITSSET = 0x4A,
+        OP_KEYBINDING = 0x4B,
+        OP_ACTIONSLOTUSABLE = 0x4C,
+        OP_HUDFADE = 0x4D,
+        OP_MAXRECOMMENDEDPLAYERS = 0x4E,
+        OP_ACCEPTINGINVITE = 0x4F,
+        OP_ISINTERMISSION = 0x50,
+        NUM_OPERATORS = 0x51,
 
         OP_COUNT
     };

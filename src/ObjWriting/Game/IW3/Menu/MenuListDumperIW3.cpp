@@ -53,7 +53,7 @@ namespace
 
 namespace menu
 {
-    void CreateDumpingStateForMenuListIW3(MenuDumpingZoneState* zoneState, const MenuList* menuList)
+    void CreateDumpingStateForMenuListIW4(MenuDumpingZoneState* zoneState, const MenuList* menuList)
     {
         if (menuList->menuCount <= 0 || menuList->menus == nullptr || menuList->name == nullptr)
             return;
@@ -116,7 +116,7 @@ namespace menu
 
         auto menuListAssets = context.m_zone.m_pools.PoolAssets<AssetMenuList>();
         for (const auto* asset : menuListAssets)
-            CreateDumpingStateForMenuListIW3(zoneState, asset->Asset());
+            CreateDumpingStateForMenuListIW4(zoneState, asset->Asset());
 
         AbstractAssetDumper::Dump(context);
     }

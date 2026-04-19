@@ -11,7 +11,7 @@ namespace menu
     class IWriterIW3 : public IWriter
     {
     public:
-        virtual void WriteFunctionDef(const std::string& functionName, const IW3::statement_s* statement) = 0;
+        virtual void WriteFunctionDef(const std::string& functionName, const IW3::statement_s& statement) = 0;
         virtual void WriteMenu(const IW3::menuDef_t& menu) = 0;
     };
 
