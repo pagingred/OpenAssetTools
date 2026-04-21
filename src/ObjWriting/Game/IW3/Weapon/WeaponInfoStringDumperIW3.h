@@ -5,7 +5,7 @@
 
 namespace weapon
 {
-    class WeaponDumperIW3 final : public AbstractAssetDumper<IW3::AssetWeapon>
+    class InfoStringDumperIW3 final : public AbstractAssetDumper<IW3::AssetWeapon>
     {
     protected:
         void DumpAsset(AssetDumpingContext& context, const XAssetInfo<IW3::AssetWeapon::Type>& asset) override;

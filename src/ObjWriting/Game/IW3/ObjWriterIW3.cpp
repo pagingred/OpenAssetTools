@@ -7,7 +7,7 @@
 #include "Localize/LocalizeDumperIW3.h"
 #include "Maps/MapEntsDumperIW3.h"
 #include "RawFile/RawFileDumperIW3.h"
-#include "Weapon/WeaponDumperIW3.h"
+#include "Weapon/WeaponInfoStringDumperIW3.h"
 #include "Sound/LoadedSoundDumperIW3.h"
 #include "StringTable/StringTableDumperIW3.h"
 
