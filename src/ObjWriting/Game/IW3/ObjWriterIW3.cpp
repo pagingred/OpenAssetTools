@@ -10,6 +10,7 @@
 #include "Localize/LocalizeDumperIW3.h"
 #include "Maps/MapEntsDumperIW3.h"
 #include "PhysPreset/PhysPresetInfoStringDumperIW3.h"
+#include "FxImpactTable/FxImpactTableDumperIW3.h"
 #include "RawFile/RawFileDumperIW3.h"
 #include "Sound/LoadedSoundDumperIW3.h"
 #include "Sound/SndCurveDumperIW3.h"
@@ -49,7 +50,7 @@ void ObjWriter::RegisterAssetDumpers(AssetDumpingContext& context)
     RegisterAssetDumper(std::make_unique<weapon::DumperIW3>());
     // REGISTER_DUMPER(AssetDumperSndDriverGlobals)
     // REGISTER_DUMPER(AssetDumperFxEffectDef)
-    // REGISTER_DUMPER(AssetDumperFxImpactTable)
+    RegisterAssetDumper(std::make_unique<fx_impact_table::DumperIW3>());
     RegisterAssetDumper(std::make_unique<raw_file::DumperIW3>());
     RegisterAssetDumper(std::make_unique<string_table::DumperIW3>());
 }
