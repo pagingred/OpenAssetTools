@@ -2,6 +2,7 @@
 
 #include "Game/IW3/Font/FontDumperIW3.h"
 #include "Game/IW3/Image/ImageDumperIW3.h"
+#include "FxImpactTable/FxImpactTableDumperIW3.h"
 #include "Game/IW3/Material/MaterialJsonDumperIW3.h"
 #include "Game/IW3/Techset/TechsetDumperIW3.h"
 #include "Game/IW3/XAnim/XAnimDumperIW3.h"
@@ -10,7 +11,6 @@
 #include "Localize/LocalizeDumperIW3.h"
 #include "Maps/MapEntsDumperIW3.h"
 #include "PhysPreset/PhysPresetInfoStringDumperIW3.h"
-#include "FxImpactTable/FxImpactTableDumperIW3.h"
 #include "RawFile/RawFileDumperIW3.h"
 #include "Sound/LoadedSoundDumperIW3.h"
 #include "Sound/SndCurveDumperIW3.h"
