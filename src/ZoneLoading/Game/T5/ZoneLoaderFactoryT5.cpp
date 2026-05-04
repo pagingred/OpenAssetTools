@@ -11,10 +11,14 @@
 #include "Loading/Steps/StepLoadZoneContent.h"
 #include "Loading/Steps/StepLoadZoneSizes.h"
 #include "Utils/ClassUtils.h"
+#include "Utils/Endianness.h"
 
 #include <cassert>
 #include <cstring>
 #include <type_traits>
+#include <IPublicKeyAlgorithm.h>
+#include <Algorithms/AlgorithmRsa.h>
+#include <Utils/Logging/Log.h>
 
 using namespace T5;
 
@@ -38,24 +42,62 @@ namespace
 
 std::optional<ZoneLoaderInspectionResult> ZoneLoaderFactory::InspectZoneHeader(const ZoneHeader& header) const
 {
-    if (header.m_version != ZoneConstants::ZONE_VERSION)
-        return std::nullopt;
-
-    if (!memcmp(header.m_magic, ZoneConstants::MAGIC_UNSIGNED, std::char_traits<char>::length(ZoneConstants::MAGIC_UNSIGNED)))
+    if (endianness::FromLittleEndian(header.m_version) == ZoneConstants::ZONE_VERSION)
     {
-        return ZoneLoaderInspectionResult{
-            .m_game_id = GameId::T5,
-            .m_endianness = GameEndianness::LE,
-            .m_word_size = GameWordSize::ARCH_32,
-            .m_platform = GamePlatform::PC,
-            // There is no way to know whether unsigned zones are official.
-            .m_is_official = false,
-            .m_is_signed = false,
-            .m_is_encrypted = false,
-        };
+        if (!memcmp(header.m_magic, ZoneConstants::MAGIC_UNSIGNED, std::char_traits<char>::length(ZoneConstants::MAGIC_UNSIGNED)))
+        {
+            return ZoneLoaderInspectionResult{
+                .m_game_id = GameId::T5,
+                .m_endianness = GameEndianness::LE,
+                .m_word_size = GameWordSize::ARCH_32,
+                .m_platform = GamePlatform::PC,
+                // There is no way to know whether unsigned zones are official.
+                .m_is_official = false,
+                .m_is_signed = false,
+                .m_is_encrypted = false,
+            };
+        }
+    }
+    else if (endianness::FromBigEndian(header.m_version) == ZoneConstants::ZONE_VERSION)
+    {
+        if (!memcmp(header.m_magic, ZoneConstants::MAGIC_SIGNED_TREYARCH, std::char_traits<char>::length(ZoneConstants::MAGIC_SIGNED_TREYARCH)))
+        {
+            return ZoneLoaderInspectionResult{
+                .m_game_id = GameId::T5,
+                .m_endianness = GameEndianness::BE,
+                .m_word_size = GameWordSize::ARCH_32,
+                .m_platform = GamePlatform::XBOX,
+                .m_is_official = true,
+                .m_is_signed = true,
+                .m_is_encrypted = true,
+            };
+        }
     }
 
     return std::nullopt;
+}
+
+std::unique_ptr<cryptography::IPublicKeyAlgorithm> SetupRsa(const bool isOfficial)
+{
+    if (isOfficial)
+    {
+        auto rsa = cryptography::CreateRsa(cryptography::HashingAlgorithm::RSA_HASH_SHA256, cryptography::RsaPaddingMode::RSA_PADDING_PSS);
+
+        if (!rsa->SetKey(ZoneConstants::RSA_PUBLIC_KEY_TREYARCH, sizeof(ZoneConstants::RSA_PUBLIC_KEY_TREYARCH)))
+        {
+            con::error("Invalid public key for signature checking");
+            return nullptr;
+        }
+
+        return rsa;
+    }
+    else
+    {
+        assert(false);
+
+        // TODO: Load custom RSA key here
+        return nullptr;
+    }
 }
 
 std::unique_ptr<ZoneLoader> ZoneLoaderFactory::CreateLoaderForHeader(const ZoneHeader& header,
@@ -75,6 +117,9 @@ std::unique_ptr<ZoneLoader> ZoneLoaderFactory::CreateLoaderForHeader(const ZoneH
     auto zoneLoader = std::make_unique<ZoneLoader>(std::move(zone));
 
     SetupBlock(*zoneLoader);
+
+    // If file is signed setup a RSA instance.
+    auto rsa = inspectResult->m_is_signed ? SetupRsa(inspectResult->m_is_official) : nullptr;
 
     zoneLoader->AddLoadingStep(step::CreateStepAddProcessor(processor::CreateProcessorInflate(ZoneConstants::AUTHED_CHUNK_SIZE)));
 
