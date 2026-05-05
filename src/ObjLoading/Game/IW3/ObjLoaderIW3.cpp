@@ -18,6 +18,7 @@
 #include "ObjLoading.h"
 #include "PhysPreset/GdtLoaderPhysPresetIW3.h"
 #include "PhysPreset/RawLoaderPhysPresetIW3.h"
+#include "FxImpactTable/FxImpactTableLoaderIW3.h"
 #include "RawFile/AssetLoaderRawFileIW3.h"
 #include "Sound/LoaderSoundCurveIW3.h"
 #include "StringTable/AssetLoaderStringTableIW3.h"
@@ -128,7 +129,7 @@ namespace
         collection.AddAssetCreator(weapon::CreateGdtLoaderIW3(memory, searchPath, gdt, zone));
         // collection.AddAssetCreator(std::make_unique<AssetLoaderSoundDriverGlobals>(memory));
         // collection.AddAssetCreator(std::make_unique<AssetLoaderFx>(memory));
-        // collection.AddAssetCreator(std::make_unique<AssetLoaderImpactFx>(memory));
+        collection.AddAssetCreator(fx_impact_table::CreateLoaderIW3(memory, searchPath, zone));
         collection.AddAssetCreator(raw_file::CreateLoaderIW3(memory, searchPath));
         collection.AddAssetCreator(string_table::CreateLoaderIW3(memory, searchPath));
 
