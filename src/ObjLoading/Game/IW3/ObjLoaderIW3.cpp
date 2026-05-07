@@ -1,6 +1,7 @@
 #include "ObjLoaderIW3.h"
 
 #include "Asset/GlobalAssetPoolsLoader.h"
+#include "FxImpactTable/FxImpactTableLoaderIW3.h"
 #include "Game/IW3/AssetMarkerIW3.h"
 #include "Game/IW3/Font/FontLoaderIW3.h"
 #include "Game/IW3/GameIW3.h"
@@ -18,7 +19,6 @@
 #include "ObjLoading.h"
 #include "PhysPreset/GdtLoaderPhysPresetIW3.h"
 #include "PhysPreset/RawLoaderPhysPresetIW3.h"
-#include "FxImpactTable/FxImpactTableLoaderIW3.h"
 #include "RawFile/AssetLoaderRawFileIW3.h"
 #include "Sound/LoaderSoundCurveIW3.h"
 #include "StringTable/AssetLoaderStringTableIW3.h"
