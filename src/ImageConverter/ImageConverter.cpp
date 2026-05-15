@@ -138,6 +138,7 @@ namespace
             switch (*m_game_to_convert_to)
             {
             case GameId::IW3:
+            case GameId::T4:
                 m_iwi_writer = std::make_unique<image::iwi6::IwiWriter>();
                 break;
             case GameId::IW4:
@@ -164,8 +165,9 @@ namespace
             con::info("  1 - Call Of Duty 4: Modern Warfare (IW3)");
             con::info("  2 - Call Of Duty: Modern Warfare 2 (IW4)");
             con::info("  3 - Call Of Duty: Modern Warfare 3 (IW5)");
-            con::info("  4 - Call Of Duty: Black Ops (T5)");
-            con::info("  5 - Call Of Duty: Black Ops 2 (T6)");
+            con::info("  4 - Call Of Duty: World at War (T4)");
+            con::info("  5 - Call Of Duty: Black Ops (T5)");
+            con::info("  6 - Call Of Duty: Black Ops 2 (T6)");
 
             unsigned num;
             std::cin >> num;
@@ -182,9 +184,12 @@ namespace
                 m_game_to_convert_to = GameId::IW5;
                 break;
             case 4:
-                m_game_to_convert_to = GameId::T5;
+                m_game_to_convert_to = GameId::T4;
                 break;
             case 5:
+                m_game_to_convert_to = GameId::T5;
+                break;
+            case 6:
                 m_game_to_convert_to = GameId::T6;
                 break;
             default:
