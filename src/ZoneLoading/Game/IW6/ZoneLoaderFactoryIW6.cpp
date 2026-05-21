@@ -8,6 +8,7 @@
 #include "Loading/Processor/ProcessorAuthedBlocks.h"
 #include "Loading/Processor/ProcessorCaptureData.h"
 #include "Loading/Processor/ProcessorInflate.h"
+#include "Loading/Processor/ProcessorXChunks.h"
 #include "Loading/Steps/StepAddProcessor.h"
 #include "Loading/Steps/StepAllocXBlocks.h"
 #include "Loading/Steps/StepCallback.h"
@@ -226,7 +227,7 @@ std::unique_ptr<ZoneLoader> ZoneLoaderFactory::CreateLoaderForHeader(const ZoneH
     }
     else if (compressionType == FF_COMPRESSION_LZX)
     {
-        con::warn("LZX not handled yet!");
+        zoneLoader->AddLoadingStep(step::CreateStepAddProcessor(processor::CreateProcessorXChunks(1, 20000000, inspectResult->m_endianness)));
     }
     else
     {
