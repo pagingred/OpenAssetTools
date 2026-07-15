@@ -120,7 +120,7 @@ using `Linker`):
 | LeaderboardDef            | ✅               | ✅               |                                                                                                               |
 | StructuredDataDefSet      | ❌               | ❌               |                                                                                                               |
 | TracerDef                 | ❌               | ❌               |                                                                                                               |
-| VehicleDef                | ❌               | ❌               |                                                                                                               |
+| VehicleDef                | ❌               | ✅               |                                                                                                               |
 | AddonMapEnts              | ⁉️              | ❌               | MapEnts String can be exported. Binary data currently not.                                                    |
 
 ## T4 (Call of Duty: World at War)
