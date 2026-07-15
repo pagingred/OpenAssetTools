@@ -14,6 +14,8 @@
 #include "Game/T5/XModel/LoaderXModelT5.h"
 #include "LightDef/LightDefLoaderT5.h"
 #include "Localize/LoaderLocalizeT5.h"
+#include "Menu/RawLoaderMenuDefT5.h"
+#include "Menu/RawLoaderMenuListT5.h"
 #include "Material/LoaderMaterialT5.h"
 #include "ObjLoading.h"
 #include "PhysPreset/GdtLoaderPhysPresetT5.h"
@@ -134,8 +136,8 @@ namespace
         // collection.AddAssetCreator(std::make_unique<AssetLoaderGfxWorld>(memory));
         collection.AddAssetCreator(light_def::CreateLoaderT5(memory, searchPath));
         collection.AddAssetCreator(font::CreateLoaderT5(memory, searchPath));
-        // collection.AddAssetCreator(std::make_unique<AssetLoaderMenuList>(memory));
-        // collection.AddAssetCreator(std::make_unique<AssetLoaderMenu>(memory));
+        collection.AddAssetCreator(menu::CreateRawLoaderMenuListT5(memory, searchPath));
+        collection.AddAssetCreator(menu::CreateRawLoaderMenuDefT5(memory, searchPath));
         collection.AddAssetCreator(localize::CreateLoaderT5(memory, searchPath, zone));
         collection.AddAssetCreator(weapon::CreateRawLoaderT5(memory, searchPath, zone));
         collection.AddAssetCreator(weapon::CreateGdtLoaderT5(memory, searchPath, gdt, zone));

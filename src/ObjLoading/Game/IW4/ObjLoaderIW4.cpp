@@ -16,7 +16,8 @@
 #include "LightDef/LightDefLoaderIW4.h"
 #include "Localize/LoaderLocalizeIW4.h"
 #include "Material/LoaderMaterialIW4.h"
-#include "Menu/LoaderMenuListIW4.h"
+#include "Menu/RawLoaderMenuDefIW4.h"
+#include "Menu/RawLoaderMenuListIW4.h"
 #include "ObjLoading.h"
 #include "PhysPreset/GdtLoaderPhysPresetIW4.h"
 #include "PhysPreset/RawLoaderPhysPresetIW4.h"
@@ -148,8 +149,8 @@ namespace
         // collection.AddAssetCreator(std::make_unique<AssetLoaderGfxWorld>(memory));
         collection.AddAssetCreator(light_def::CreateLoaderIW4(memory, searchPath));
         collection.AddAssetCreator(font::CreateLoaderIW4(memory, searchPath));
-        collection.AddAssetCreator(menu::CreateMenuListLoaderIW4(memory, searchPath));
-        // collection.AddAssetCreator(std::make_unique<AssetLoaderMenu>(memory));
+        collection.AddAssetCreator(menu::CreateRawLoaderMenuListIW4(memory, searchPath));
+        collection.AddAssetCreator(menu::CreateRawLoaderMenuDefIW4(memory, searchPath));
         collection.AddAssetCreator(localize::CreateLoaderIW4(memory, searchPath, zone));
         collection.AddAssetCreator(weapon::CreateRawLoaderIW4(memory, searchPath, zone));
         collection.AddAssetCreator(weapon::CreateGdtLoaderIW4(memory, searchPath, gdt, zone));

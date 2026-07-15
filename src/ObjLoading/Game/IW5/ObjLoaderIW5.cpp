@@ -16,7 +16,8 @@
 #include "LightDef/LightDefLoaderIW5.h"
 #include "Localize/LoaderLocalizeIW5.h"
 #include "Material/LoaderMaterialIW5.h"
-#include "Menu/LoaderMenuListIW5.h"
+#include "Menu/RawLoaderMenuDefIW5.h"
+#include "Menu/RawLoaderMenuListIW5.h"
 #include "ObjLoading.h"
 #include "PhysPreset/GdtLoaderPhysPresetIW5.h"
 #include "PhysPreset/RawLoaderPhysPresetIW5.h"
@@ -156,8 +157,8 @@ namespace
         // collection.AddAssetCreator(std::make_unique<AssetLoaderGfxWorld>(memory));
         collection.AddAssetCreator(light_def::CreateLoaderIW5(memory, searchPath));
         collection.AddAssetCreator(font::CreateLoaderIW5(memory, searchPath));
-        collection.AddAssetCreator(menu::CreateMenuListLoaderIW5(memory, searchPath));
-        // collection.AddAssetCreator(std::make_unique<AssetLoaderMenu>(memory));
+        collection.AddAssetCreator(menu::CreateRawLoaderMenuListIW5(memory, searchPath));
+        collection.AddAssetCreator(menu::CreateRawLoaderMenuDefIW5(memory, searchPath));
         collection.AddAssetCreator(localize::CreateLoaderIW5(memory, searchPath, zone));
         collection.AddAssetCreator(attachment::CreateLoaderIW5(memory, searchPath));
         collection.AddAssetCreator(weapon::CreateRawLoaderIW5(memory, searchPath, zone));

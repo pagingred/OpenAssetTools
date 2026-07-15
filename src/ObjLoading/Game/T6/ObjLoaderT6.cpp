@@ -22,6 +22,8 @@
 #include "Leaderboard/JsonLoaderLeaderboardT6.h"
 #include "LightDef/LightDefLoaderT6.h"
 #include "Localize/LocalizeLoaderT6.h"
+#include "Menu/RawLoaderMenuDefT6.h"
+#include "Menu/RawLoaderMenuListT6.h"
 #include "Material/LoaderMaterialT6.h"
 #include "ObjContainer/IPak/IPak.h"
 #include "ObjLoading.h"
@@ -408,8 +410,8 @@ namespace T6
             collection.AddAssetCreator(font::CreateLoaderT6(memory, searchPath));
             collection.AddAssetCreator(font_icon::CreateCsvLoaderT6(memory, searchPath));
             collection.AddAssetCreator(font_icon::CreateJsonLoaderT6(memory, searchPath));
-            // collection.AddAssetCreator(std::make_unique<AssetLoaderMenuList>(memory));
-            // collection.AddAssetCreator(std::make_unique<AssetLoaderMenu>(memory));
+            collection.AddAssetCreator(menu::CreateRawLoaderMenuListT6(memory, searchPath));
+            collection.AddAssetCreator(menu::CreateRawLoaderMenuDefT6(memory, searchPath));
             collection.AddAssetCreator(localize::CreateLoaderT6(memory, searchPath, zone));
             collection.AddAssetCreator(weapon::CreateRawLoaderT6(memory, searchPath, zone));
             collection.AddAssetCreator(weapon::CreateGdtLoaderT6(memory, searchPath, gdt, zone));

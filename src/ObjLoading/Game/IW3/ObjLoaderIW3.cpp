@@ -14,6 +14,8 @@
 #include "Game/IW3/XModel/LoaderXModelIW3.h"
 #include "LightDef/LightDefLoaderIW3.h"
 #include "Localize/AssetLoaderLocalizeIW3.h"
+#include "Menu/RawLoaderMenuDefIW3.h"
+#include "Menu/RawLoaderMenuListIW3.h"
 #include "Material/LoaderMaterialIW3.h"
 #include "ObjLoading.h"
 #include "PhysPreset/GdtLoaderPhysPresetIW3.h"
@@ -121,8 +123,8 @@ namespace
         // collection.AddAssetCreator(std::make_unique<AssetLoaderGfxWorld>(memory));
         collection.AddAssetCreator(light_def::CreateLoaderIW3(memory, searchPath));
         collection.AddAssetCreator(font::CreateLoaderIW3(memory, searchPath));
-        // collection.AddAssetCreator(std::make_unique<AssetLoaderMenuList>(memory));
-        // collection.AddAssetCreator(std::make_unique<AssetLoaderMenu>(memory));
+        collection.AddAssetCreator(menu::CreateRawLoaderMenuListIW3(memory, searchPath));
+        collection.AddAssetCreator(menu::CreateRawLoaderMenuDefIW3(memory, searchPath));
         collection.AddAssetCreator(localize::CreateLoaderIW3(memory, searchPath, zone));
         collection.AddAssetCreator(weapon::CreateRawLoaderIW3(memory, searchPath, zone));
         collection.AddAssetCreator(weapon::CreateGdtLoaderIW3(memory, searchPath, gdt, zone));
