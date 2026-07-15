@@ -190,7 +190,7 @@ using `Linker`):
 | PackIndex            | ❌               | ❌               |                                                                              |
 | XGlobals             | ❌               | ❌               |                                                                              |
 | ddlRoot_t            | ❌               | ❌               |                                                                              |
-| Glasses              | ❌               | ❌               |                                                                              |
+| Glasses              | ❌               | ✅               |                                                                              |
 | EmblemSet            | ❌               | ❌               |                                                                              |
 
 ## T6 (Call of Duty: Black Ops II)
@@ -231,7 +231,7 @@ using `Linker`):
 | LeaderboardDef         | ✅               | ✅               |                                                                                                                                                                |
 | XGlobals               | ❌               | ❌               |                                                                                                                                                                |
 | ddlRoot_t              | ❌               | ❌               |                                                                                                                                                                |
-| Glasses                | ❌               | ❌               |                                                                                                                                                                |
+| Glasses                | ❌               | ✅               |                                                                                                                                                                |
 | EmblemSet              | ❌               | ❌               |                                                                                                                                                                |
 | ScriptParseTree        | ⁉️              | ⁉️              | Can only be dumped/loaded as binary. Editing is possible with [GSC-Tool](https://github.com/xensik/gsc-tool). Plutonium supports loading source files however. |
 | KeyValuePairs          | ✅               | ✅               | Is dumped/loaded as part of the `.zone` file.                                                                                                                  |
