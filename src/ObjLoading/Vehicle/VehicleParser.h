@@ -1,5 +1,5 @@
 
-// Generated from E:/Projects/VS/OpenAssetTools/src/ObjLoading/PhysPreset/PhysPreset.g4 by ANTLR 4.13.2
+// Generated from E:/Projects/VS/OpenAssetTools/src/ObjLoading/Vehicle/Vehicle.g4 by ANTLR 4.13.2
 
 #pragma once
 
@@ -9,21 +9,22 @@
 
 
 
-class  PhysPresetParser : public antlr4::Parser {
+class  VehicleParser : public antlr4::Parser {
 public:
   enum {
-    PHYSIC = 1, BACKSLASH = 2, FLOAT = 3, INTEGER = 4, IDENTIFIER = 5, WS = 6
+    VEHICLEFILE = 1, BACKSLASH = 2, FOUR_WHEEL = 3, FLOAT = 4, INTEGER = 5, 
+    IDENTIFIER = 6, WS = 7
   };
 
   enum {
-    RulePhysPreset = 0, RulePair = 1, RuleKey = 2, RuleValue = 3
+    RuleVehicle = 0, RulePair = 1, RuleKey = 2, RuleValue = 3
   };
 
-  explicit PhysPresetParser(antlr4::TokenStream *input);
+  explicit VehicleParser(antlr4::TokenStream *input);
 
-  PhysPresetParser(antlr4::TokenStream *input, const antlr4::atn::ParserATNSimulatorOptions &options);
+  VehicleParser(antlr4::TokenStream *input, const antlr4::atn::ParserATNSimulatorOptions &options);
 
-  ~PhysPresetParser() override;
+  ~VehicleParser() override;
 
   std::string getGrammarFileName() const override;
 
@@ -36,16 +37,16 @@ public:
   antlr4::atn::SerializedATNView getSerializedATN() const override;
 
 
-  class PhysPresetContext;
+  class VehicleContext;
   class PairContext;
   class KeyContext;
   class ValueContext; 
 
-  class  PhysPresetContext : public antlr4::ParserRuleContext {
+  class  VehicleContext : public antlr4::ParserRuleContext {
   public:
-    PhysPresetContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    VehicleContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
-    antlr4::tree::TerminalNode *PHYSIC();
+    antlr4::tree::TerminalNode *VEHICLEFILE();
     antlr4::tree::TerminalNode *EOF();
     std::vector<PairContext *> pair();
     PairContext* pair(size_t i);
@@ -55,7 +56,7 @@ public:
    
   };
 
-  PhysPresetContext* physPreset();
+  VehicleContext* vehicle();
 
   class  PairContext : public antlr4::ParserRuleContext {
   public:
@@ -93,6 +94,7 @@ public:
     antlr4::tree::TerminalNode *FLOAT();
     antlr4::tree::TerminalNode *INTEGER();
     antlr4::tree::TerminalNode *IDENTIFIER();
+    antlr4::tree::TerminalNode *FOUR_WHEEL();
 
     virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
     virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;

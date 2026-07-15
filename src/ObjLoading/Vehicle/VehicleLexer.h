@@ -1,5 +1,5 @@
 
-// Generated from E:/Projects/VS/OpenAssetTools/src/ObjLoading/PhysPreset/PhysPreset.g4 by ANTLR 4.13.2
+// Generated from E:/Projects/VS/OpenAssetTools/src/ObjLoading/Vehicle/Vehicle.g4 by ANTLR 4.13.2
 
 #pragma once
 
@@ -9,15 +9,16 @@
 
 
 
-class  PhysPresetLexer : public antlr4::Lexer {
+class  VehicleLexer : public antlr4::Lexer {
 public:
   enum {
-    PHYSIC = 1, BACKSLASH = 2, FLOAT = 3, INTEGER = 4, IDENTIFIER = 5, WS = 6
+    VEHICLEFILE = 1, BACKSLASH = 2, FOUR_WHEEL = 3, FLOAT = 4, INTEGER = 5, 
+    IDENTIFIER = 6, WS = 7
   };
 
-  explicit PhysPresetLexer(antlr4::CharStream *input);
+  explicit VehicleLexer(antlr4::CharStream *input);
 
-  ~PhysPresetLexer() override;
+  ~VehicleLexer() override;
 
 
   std::string getGrammarFileName() const override;
