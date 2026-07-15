@@ -29,8 +29,8 @@ using `Linker`):
 | GfxWorld             | ❌               | ❌               |                                                                              |
 | GfxLightDef          | ✅               | ✅               |                                                                              |
 | Font_s               | ✅               | ✅               |                                                                              |
-| MenuList             | ❌               | ❌               |                                                                              |
-| menuDef_t            | ❌               | ❌               |                                                                              |
+| MenuList             | ❌               | ✅               |                                                                              |
+| menuDef_t            | ❌               | ✅               |                                                                              |
 | LocalizeEntry        | ✅               | ✅               |                                                                              |
 | WeaponDef            | ✅               | ✅               |                                                                              |
 | FxEffectDef          | ❌               | ❌               |                                                                              |
@@ -146,8 +146,8 @@ using `Linker`):
 | GfxWorld             | ❌               | ❌               |                                                                              |
 | GfxLightDef          | ❌               | ❌               |                                                                              |
 | Font_s               | ✅               | ✅               |                                                                              |
-| MenuList             | ❌               | ❌               |                                                                              |
-| menuDef_t            | ❌               | ❌               |                                                                              |
+| MenuList             | ❌               | ✅               |                                                                              |
+| menuDef_t            | ❌               | ✅               |                                                                              |
 | LocalizeEntry        | ✅               | ✅               |                                                                              |
 | WeaponDef            | ✅               | ✅               |                                                                              |
 | FxEffectDef          | ❌               | ❌               |                                                                              |
@@ -178,8 +178,8 @@ using `Linker`):
 | GfxWorld             | ❌               | ❌               |                                                                              |
 | GfxLightDef          | ✅               | ✅               |                                                                              |
 | Font_s               | ✅               | ✅               |                                                                              |
-| MenuList             | ❌               | ❌               |                                                                              |
-| menuDef_t            | ❌               | ❌               |                                                                              |
+| MenuList             | ❌               | ✅               |                                                                              |
+| menuDef_t            | ❌               | ✅               |                                                                              |
 | LocalizeEntry        | ✅               | ✅               |                                                                              |
 | WeaponVariantDef     | ✅               | ✅               |                                                                              |
 | SndDriverGlobals     | ❌               | ❌               |                                                                              |
@@ -217,7 +217,7 @@ using `Linker`):
 | Font_s                 | ✅               | ✅               |                                                                                                                                                                |
 | FontIcon               | ✅               | ✅               |                                                                                                                                                                |
 | MenuList               | ❌               | ❌               |                                                                                                                                                                |
-| menuDef_t              | ❌               | ❌               |                                                                                                                                                                |
+| menuDef_t              | ❌               | ✅               |                                                                                                                                                                |
 | LocalizeEntry          | ✅               | ✅               |                                                                                                                                                                |
 | WeaponVariantDef       | ✅               | ✅               |                                                                                                                                                                |
 | WeaponAttachment       | ✅               | ✅               |                                                                                                                                                                |
