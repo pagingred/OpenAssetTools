@@ -1,6 +1,6 @@
 #include "Game/T4/Weapon/FlameTableLoaderT4.h"
 
-#include "Game/T4/GameT4.h"
+#include "Game/T4/T4.h"
 #include "SearchPath/MockSearchPath.h"
 #include "Utils/MemoryManager.h"
 
