@@ -1,49 +1,133 @@
 #include "RawLoaderZBarrierT6.h"
 
-#include "Game/T6/ObjConstantsT6.h"
+#include "Game/T6/CommonT6.h"
 #include "Game/T6/T6.h"
-#include "InfoString/InfoString.h"
-#include "InfoStringLoaderZBarrierT6.h"
-#include "Utils/Logging/Log.h"
-#include "ZBarrier/ZBarrierCommon.h"
+#include "Game/T6/ZBarrier/ZBarrierFields.h"
+#include "ZBarrier/AbstractZBarrierLoader.h"
 
-#include <cstring>
-#include <format>
-#include <iostream>
+#include <string>
+#include <unordered_map>
 
 using namespace T6;
 
 namespace
 {
-    class RawLoaderZBarrier final : public AssetCreator<AssetZBarrier>
+    class RawLoaderZBarrier final : public z_barrier::AbstractZBarrierLoader<AssetZBarrier>
     {
     public:
         RawLoaderZBarrier(MemoryManager& memory, ISearchPath& searchPath, Zone& zone)
-            : m_search_path(searchPath),
-              m_info_string_loader(memory, searchPath, zone)
+            : AbstractZBarrierLoader(memory, searchPath),
+              m_zone(zone)
         {
         }
 
-        AssetCreationResult CreateAsset(const std::string& assetName, AssetCreationContext& context) override
+    protected:
+        bool FillFromTree(ZBarrierDef& zbarrier,
+                          const std::string& assetName,
+                          ZBarrierParser::ZBarrierContext* tree,
+                          AssetCreationContext& context,
+                          AssetRegistration<AssetZBarrier>& registration) override
         {
-            const auto fileName = z_barrier::GetFileNameForAssetName(assetName);
-            const auto file = m_search_path.Open(fileName);
-            if (!file.IsOpen())
-                return AssetCreationResult::NoAction();
+            zbarrier.name = m_memory.Dup(assetName.c_str());
 
-            InfoString infoString;
-            if (!infoString.FromStream(INFO_STRING_PREFIX_ZBARRIER, *file.m_stream))
+            static const auto fieldLookup = []()
             {
-                con::error("Could not parse as info string file: \"{}\"", fileName);
-                return AssetCreationResult::Failure();
+                std::unordered_map<std::string, const cspField_t*> map;
+                for (const auto& f : zbarrier_fields)
+                    map[f.szName] = &f;
+                return map;
+            }();
+
+            for (auto* pair : tree->pair())
+            {
+                const auto key = pair->key()->getText();
+                const auto value = pair->value()->getText();
+
+                const auto it = fieldLookup.find(key);
+                if (it == fieldLookup.end())
+                    continue;
+
+                const auto& field = *it->second;
+                auto* base = reinterpret_cast<uint8_t*>(&zbarrier) + field.iOffset;
+
+                switch (static_cast<csParseFieldType_t>(field.iFieldType))
+                {
+                case CSPFT_FLOAT:
+                    if (!value.empty())
+                        *reinterpret_cast<float*>(base) = std::stof(value);
+                    break;
+
+                case CSPFT_UINT:
+                    if (!value.empty())
+                        *reinterpret_cast<unsigned int*>(base) = static_cast<unsigned int>(std::stoul(value));
+                    break;
+
+                case CSPFT_STRING:
+                    *reinterpret_cast<const char**>(base) = m_memory.Dup(value.c_str());
+                    break;
+
+                case CSPFT_SCRIPT_STRING:
+                {
+                    const auto scrStr = m_zone.m_script_strings.AddOrGetScriptString(value);
+                    registration.AddScriptString(scrStr);
+                    *reinterpret_cast<scr_string_t*>(base) = scrStr;
+                    break;
+                }
+
+                case CSPFT_SOUND_ALIAS_ID:
+                    *reinterpret_cast<unsigned int*>(base) = Common::Com_HashString(value.c_str());
+                    break;
+
+                case CSPFT_XMODEL:
+                {
+                    if (value.empty())
+                        break;
+                    auto* xmodel = context.LoadDependency<AssetXModel>(value);
+                    if (!xmodel)
+                    {
+                        con::error("Failed to load xmodel \"{}\" for zbarrier \"{}\"", value, assetName);
+                        return false;
+                    }
+                    registration.AddDependency(xmodel);
+                    *reinterpret_cast<XModel**>(base) = xmodel->Asset();
+                    break;
+                }
+
+                case CSPFT_FX:
+                {
+                    if (value.empty())
+                        break;
+                    auto* fx = context.LoadDependency<AssetFx>(value);
+                    if (!fx)
+                    {
+                        con::error("Failed to load fx \"{}\" for zbarrier \"{}\"", value, assetName);
+                        return false;
+                    }
+                    registration.AddDependency(fx);
+                    *reinterpret_cast<FxEffectDef**>(base) = fx->Asset();
+                    break;
+                }
+
+                default:
+                    break;
+                }
             }
 
-            return m_info_string_loader.CreateAsset(assetName, infoString, context);
+            zbarrier.numBoardsInBarrier = static_cast<int>(std::extent_v<decltype(ZBarrierDef::boards)>);
+            for (auto i = 0u; i < std::extent_v<decltype(ZBarrierDef::boards)>; i++)
+            {
+                if (zbarrier.boards[i].pBoardModel == nullptr)
+                {
+                    zbarrier.numBoardsInBarrier = static_cast<int>(i);
+                    break;
+                }
+            }
+
+            return true;
         }
 
     private:
-        ISearchPath& m_search_path;
-        z_barrier::InfoStringLoaderT6 m_info_string_loader;
+        Zone& m_zone;
     };
 } // namespace
 
