@@ -4,6 +4,7 @@
 #include "Game/T5/AssetMarkerT5.h"
 #include "Game/T5/Font/FontLoaderT5.h"
 #include "Game/T5/GameT5.h"
+#include "Game/T5/Glasses/RawLoaderGlassesT5.h"
 #include "Game/T5/Image/ImageLoaderEmbeddedT5.h"
 #include "Game/T5/Image/ImageLoaderExternalT5.h"
 #include "Game/T5/T5.h"
@@ -147,7 +148,7 @@ namespace
         // collection.AddAssetCreator(std::make_unique<AssetLoaderPackIndex>(memory));
         // collection.AddAssetCreator(std::make_unique<AssetLoaderXGlobals>(memory));
         // collection.AddAssetCreator(std::make_unique<AssetLoaderDDL>(memory));
-        // collection.AddAssetCreator(std::make_unique<AssetLoaderGlasses>(memory));
+        collection.AddAssetCreator(glasses::CreateRawLoaderT5(memory, searchPath));
         // collection.AddAssetCreator(std::make_unique<AssetLoaderEmblemSet>(memory));
 
         collection.AddSubAssetCreator(techset::CreateVertexShaderLoaderT5(memory, searchPath));

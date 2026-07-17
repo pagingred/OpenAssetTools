@@ -7,6 +7,7 @@
 #include "Game/T6/CommonT6.h"
 #include "Game/T6/Font/FontLoaderT6.h"
 #include "Game/T6/GameT6.h"
+#include "Game/T6/Glasses/RawLoaderGlassesT6.h"
 #include "Game/T6/Image/ImageLoaderEmbeddedT6.h"
 #include "Game/T6/Image/ImageLoaderExternalT6.h"
 #include "Game/T6/T6.h"
@@ -426,7 +427,7 @@ namespace T6
             collection.AddAssetCreator(leaderboard::CreateLoaderT6(memory, searchPath));
             // collection.AddAssetCreator(std::make_unique<AssetLoaderXGlobals>(memory));
             // collection.AddAssetCreator(std::make_unique<AssetLoaderDDL>(memory));
-            // collection.AddAssetCreator(std::make_unique<AssetLoaderGlasses>(memory));
+            collection.AddAssetCreator(glasses::CreateRawLoaderT6(memory, searchPath));
             // collection.AddAssetCreator(std::make_unique<AssetLoaderEmblemSet>(memory));
             collection.AddAssetCreator(script::CreateLoaderT6(memory, searchPath));
             collection.AddAssetCreator(vehicle::CreateRawLoaderT6(memory, searchPath, zone));
